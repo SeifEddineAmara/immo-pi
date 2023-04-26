@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import tn.devteam.immonexus.Entities.Advertising;
+import tn.devteam.immonexus.Entities.AdvertisingInput;
 import tn.devteam.immonexus.Interfaces.IAdvertisingService;
 import tn.devteam.immonexus.Interfaces.IFileUploadService;
 
@@ -46,16 +47,24 @@ public class AdvertisingController {
 
 
 
+//@RequestParam("file") MultipartFile file,@RequestParam("advertising") String advertising
+  /*@PostMapping("/add-Advertisingg")
+   public Advertising addAdvertising( @RequestBody AdvertisingInput advertising) throws IOException {
+      System.out.println(advertising);
+    //   iFileUploadService.uploadfile(advertising.getFile());
 
-  /* @PostMapping("/add-Advertising")
-   public Advertising addAdvertising(@RequestParam("file") MultipartFile file, @RequestParam("advertising") String advertising) throws IOException {
-       Advertising advertising1;
-       ObjectMapper objectMapper = new ObjectMapper();
-       iFileUploadService.uploadfile(file);
-       advertising1= objectMapper.readValue(advertising,Advertising.class);
-      // log.info("hhhhhhhhhhhhhhhhh:::::"+advertising1.getTitre());
-       return  iAdvertisingService.addAdvertising(advertising1);
+       return  iAdvertisingService.addAdvertising(advertising.getAdvertising());
 
    }*/
+
+    @PostMapping("/add-Advertisingg")
+    public Advertising addAdvertising(@RequestParam("file") MultipartFile file, @RequestParam("advertising") String advertising) throws IOException {
+        Advertising advertising1;
+        ObjectMapper objectMapper = new ObjectMapper();
+        iFileUploadService.uploadfile(file);
+        advertising1= objectMapper.readValue(advertising,Advertising.class);
+        // log.info("hhhhhhhhhhhhhhhhh:::::"+advertising1.getTitre());
+        return  iAdvertisingService.addAdvertising(advertising1);
+    }
 
 }
