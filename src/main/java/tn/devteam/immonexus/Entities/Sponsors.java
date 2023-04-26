@@ -25,9 +25,5 @@ public class Sponsors implements Serializable {
     private String phoneNumber;
 
 
-    @JsonIgnore
-    @ToString.Exclude
-    @OneToMany(mappedBy = "sponsor")
-    private List<Advertising> advertisingList;
 
 }
