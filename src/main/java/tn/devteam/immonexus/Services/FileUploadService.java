@@ -11,7 +11,7 @@ import java.io.IOException;
 public class FileUploadService  implements IFileUploadService {
     @Override
     public void uploadfile(MultipartFile file) throws IllegalStateException, IOException {
-        file.transferTo(new File("C:\\Users\\TECHNOPC\\Desktop\\piangular\\angularProject\\src\\assets\\PiDevFiles\\"+file.getOriginalFilename()));
+        file.transferTo(new File("C:\\Users\\TECHNOPC\\Desktop\\ImmoFront\\PiImmoFront\\src\\assets\\"+file.getOriginalFilename()));
 
     }
 }

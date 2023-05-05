@@ -3,7 +3,9 @@ package tn.devteam.immonexus.Interfaces;
 import tn.devteam.immonexus.Entities.Advertising;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 public interface IAdvertisingService {
@@ -14,4 +16,10 @@ public interface IAdvertisingService {
     Advertising getAdvertisingById(Long idAd);
 
 
+    double calculerGainPublicitaire(Advertising advertising);
+
+    Long calculerNbreDesJours(Advertising advertising);
+
+
+    List<Advertising> getAdvertisingBetweenTwoDates(Date startDate, Date endDate);
 }

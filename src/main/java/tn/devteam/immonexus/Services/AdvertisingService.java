@@ -6,13 +6,12 @@ import org.springframework.stereotype.Service;
 import tn.devteam.immonexus.Entities.*;
 import tn.devteam.immonexus.Interfaces.IAdvertisingService;
 import tn.devteam.immonexus.Repository.AdevertisingRepository;
-import tn.devteam.immonexus.Repository.SponsorsRepository;
 
-import javax.persistence.EntityNotFoundException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -20,6 +19,8 @@ import java.util.List;
 public class AdvertisingService implements IAdvertisingService {
     @Autowired
     AdevertisingRepository adevertisingRepository;
+    @Autowired
+    private DateTimeFormatter formatter;
 
     @Override
     public List<Advertising> getAllAdvertising() {
@@ -46,6 +47,44 @@ public class AdvertisingService implements IAdvertisingService {
     @Override
     public void deleteById(Long idAdvertising){
         adevertisingRepository.deleteById(idAdvertising);
+    }
+
+    @Override
+    public double calculerGainPublicitaire(Advertising advertising) {
+        // Calculer le coût total des vues
+        double coutTotalVues = advertising.getNbrVuesCible() * advertising.getCoutParVueCible();
+
+        // Calculer le coût total des jours
+        double coutTotalJours = advertising.getNbrJours() * advertising.getCoutParJour();
+
+        double gainPublicitaire = coutTotalVues + coutTotalJours;
+
+        return gainPublicitaire;
+    }
+
+
+    @Override
+    public Long calculerNbreDesJours(Advertising advertising) {
+      Date startDate= advertising.getStartDate();
+        Date endDate= advertising.getEndDate();
+        LocalDate startLocalDate = startDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate endLocalDate = endDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        long nbrJours = ChronoUnit.DAYS.between(startLocalDate, endLocalDate);
+
+        return nbrJours;
+    }
+
+
+
+
+
+    @Override
+    public List<Advertising> getAdvertisingBetweenTwoDates(Date startDate, Date endDate) {
+
+
+        List<Advertising> advertisingList = adevertisingRepository.findByStartDateGreaterThanEqualAndEndDateLessThanEqual(startDate, endDate);
+
+        return advertisingList;
     }
 
 

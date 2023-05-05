@@ -4,6 +4,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @ToString
@@ -17,10 +19,15 @@ public class Advertising implements Serializable {
     private Long idAd;
     private String title;
     private String description;
-    private String startDate;
-    private String endDate;
+
+    @Temporal(TemporalType.DATE)
+    private Date startDate;
+    @Temporal(TemporalType.DATE)
+    private Date endDate;
 
     private String image;
+    private Long nbrJours;
+
     private double coutParJour;
     private double nbrVuesCible;
     private double coutParVueCible;
