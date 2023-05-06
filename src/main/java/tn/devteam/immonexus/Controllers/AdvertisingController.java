@@ -45,7 +45,8 @@ public class AdvertisingController {
 
     @GetMapping("/get-AllAdvertising")
     public List<Advertising> getAllAdvertising() {
-       return  this.iAdvertisingService.getAllAdvertising();
+
+        return  iAdvertisingService.getAllAdvertising();
     }
 
 
@@ -74,15 +75,6 @@ public class AdvertisingController {
 
 
 
-//@RequestParam("file") MultipartFile file,@RequestParam("advertising") String advertising
-  /*@PostMapping("/add-Advertisingg")
-   public Advertising addAdvertising( @RequestBody AdvertisingInput advertising) throws IOException {
-      System.out.println(advertising);
-    //   iFileUploadService.uploadfile(advertising.getFile());
-
-       return  iAdvertisingService.addAdvertising(advertising.getAdvertising());
-
-   }*/
 
     @PostMapping("/add-Advertisingg")
     public Advertising addAdvertising(@RequestParam("file") MultipartFile file, @RequestParam("advertising") String advertising) throws IOException {
